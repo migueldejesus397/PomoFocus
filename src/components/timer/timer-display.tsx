@@ -6,7 +6,16 @@ import { useTheme } from '@/hooks/use-theme';
 import { useState, useEffect, useRef } from 'react';
 
 
-const TIMER_DURATION_TESTING = 10000;
+const TIMER_DURATION_TESTING = 1500000;
+
+function getTimeChunks(milliseconds: number) {
+    const totalSeconds = Math.floor(milliseconds / 1000);
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+    
+    return { hours, minutes, seconds };
+}
 
 export default function Timer() {
     const { background } = useTheme();
@@ -40,7 +49,7 @@ export default function Timer() {
     return (
         <ThemedView style={[styles.container, { backgroundColor: background }]}>
             <ThemedText id="timer-display" style={[styles.timerText, {backgroundColor: background}]}>
-                {milliseconds}
+                {getTimeChunks(milliseconds).hours.toString().padStart(2, '0')} : {getTimeChunks(milliseconds).minutes.toString().padStart(2, '0')} : {getTimeChunks(milliseconds).seconds.toString().padStart(2, '0')} : {(milliseconds % 1000).toString().padStart(3, '0')}
             </ThemedText>
 
             <Button onPress={() => setIsRunning(true)} style={[styles.controlButton, { backgroundColor: background }]}>
@@ -67,7 +76,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     timerText: {
-        fontSize: 60,
+        height: 'auto',
+        width: 'auto',
+        fontSize: 40,
         fontWeight: 'bold',
         padding: 40,
     },
