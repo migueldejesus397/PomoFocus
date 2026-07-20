@@ -37,7 +37,7 @@ export default function Timer() {
                     clearInterval(interval);
                     setIsRunning(false);
                 }
-            }, 100);
+            }, 50);
 
             return(() => {
                 clearInterval(interval);
@@ -46,27 +46,28 @@ export default function Timer() {
     }, [isRunning, milliseconds])
 
 
-    return (
-        <ThemedView style={[styles.container, { backgroundColor: background }]}>
-            <ThemedText id="timer-display" style={[styles.timerText, {backgroundColor: background}]}>
-                {getTimeChunks(milliseconds).hours.toString().padStart(2, '0')} : {getTimeChunks(milliseconds).minutes.toString().padStart(2, '0')} : {getTimeChunks(milliseconds).seconds.toString().padStart(2, '0')} : {(milliseconds % 1000).toString().padStart(3, '0')}
-            </ThemedText>
+return (
+  <ThemedView style={[styles.container, { backgroundColor: background }]}>
+    <ThemedText id="timer-display" style={[styles.timerText, { backgroundColor: background }]}>
+      {getTimeChunks(milliseconds).hours.toString().padStart(2, '0')} : {getTimeChunks(milliseconds).minutes.toString().padStart(2, '0')} : {getTimeChunks(milliseconds).seconds.toString().padStart(2, '0')} : {(milliseconds % 1000).toString().padStart(3, '0')}
+    </ThemedText>
 
-            <Button onPress={() => setIsRunning(true)} style={[styles.controlButton, { backgroundColor: background }]}>
-                Start
-            </Button>
-            <Button onPress={() => setIsRunning(false)} style={[styles.controlButton, { backgroundColor: background }]}>
-                Pause
-            </Button>
-            <Button onPress={() => {
-                setIsRunning(false);
-                setMilliseconds(TIMER_DURATION_TESTING);
-            }} style={[styles.controlButton, { backgroundColor: background }]}>
-                Reset
-            </Button>
-
+        <ThemedView style={styles.buttonRow}>
+        <Button onPress={() => setIsRunning(true)} style={[styles.controlButton, { backgroundColor: background }]}>
+            Start
+        </Button>
+        <Button onPress={() => setIsRunning(false)} style={[styles.controlButton, { backgroundColor: background }]}>
+            Pause
+        </Button>
+        <Button onPress={() => {
+            setIsRunning(false);
+            setMilliseconds(TIMER_DURATION_TESTING);
+        }} style={[styles.controlButton, { backgroundColor: background }]}>
+            Reset
+        </Button>
         </ThemedView>
-    )
+  </ThemedView>
+);
 }
 
 
@@ -91,5 +92,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: 'white',
         
-    }
+    },
+        buttonRow: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: 12,
+    },
 });
