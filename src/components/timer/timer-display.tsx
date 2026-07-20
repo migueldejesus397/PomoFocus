@@ -6,41 +6,53 @@ import { useTheme } from '@/hooks/use-theme';
 import { useState, useEffect, useRef } from 'react';
 
 
-const TIMER_DURATION_TESTING = 10
+const TIMER_DURATION_TESTING = 10000;
 
 export default function Timer() {
+    const { background } = useTheme();
     const [isRunning, setIsRunning] = useState(false);
-    const [time, setTime] = useState(TIMER_DURATION_TESTING);
+    const [milliseconds, setMilliseconds] = useState(TIMER_DURATION_TESTING);
+
+    const endTimeRef = useRef(0);
     
     useEffect(() => {
-        if (isRunning && time > 0){
+        if (isRunning){
+
+            endTimeRef.current = Date.now() + milliseconds;
+
             const interval = setInterval(() => {
-                setTime((prevTime) => prevTime - 1);
-            }, 1000);
+                const msRemaining = Math.max(0, endTimeRef.current - Date.now());
+                setMilliseconds(msRemaining);
+
+                if (msRemaining <= 0){
+                    clearInterval(interval);
+                    setIsRunning(false);
+                }
+            }, 100);
 
             return(() => {
                 clearInterval(interval);
             });           
         }
-    }, [isRunning, time])
+    }, [isRunning, milliseconds])
 
 
     return (
-        <ThemedView style={[styles.container, { backgroundColor: useTheme().background }]}>
-            <ThemedText id="timer-display" style={[styles.timerText, {backgroundColor: 'lightblue'}]}>
-                {time}
+        <ThemedView style={[styles.container, { backgroundColor: background }]}>
+            <ThemedText id="timer-display" style={[styles.timerText, {backgroundColor: background}]}>
+                {milliseconds}
             </ThemedText>
 
-            <Button onPress={() => setIsRunning(true)} style={styles.controlButton}>
+            <Button onPress={() => setIsRunning(true)} style={[styles.controlButton, { backgroundColor: background }]}>
                 Start
             </Button>
-            <Button onPress={() => setIsRunning(false)} style={styles.controlButton}>
+            <Button onPress={() => setIsRunning(false)} style={[styles.controlButton, { backgroundColor: background }]}>
                 Pause
             </Button>
             <Button onPress={() => {
                 setIsRunning(false);
-                setTime(TIMER_DURATION_TESTING);
-            }} style={styles.controlButton}>
+                setMilliseconds(TIMER_DURATION_TESTING);
+            }} style={[styles.controlButton, { backgroundColor: background }]}>
                 Reset
             </Button>
 
