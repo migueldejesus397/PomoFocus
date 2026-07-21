@@ -30,6 +30,9 @@ export default function AppTabs() {
           <TabTrigger name="sample" href="/sample" asChild>
             <TabButton>Sample</TabButton>
           </TabTrigger>
+          <TabTrigger name="pomodoro_main" href="/pomodoro_main" asChild>
+            <TabButton>Pomodoro</TabButton>
+          </TabTrigger>
         </CustomTabList>
       </TabList>
     </Tabs>

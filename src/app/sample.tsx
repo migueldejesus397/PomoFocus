@@ -16,7 +16,6 @@ export default function Sample() {
       <SafeAreaView style={styles.safeArea}>
         <ThemedText style={styles.text}>Sample Content/Page for reference</ThemedText>
 
-        <br />
         <TextInput
           style={{ height: 40, borderColor: 'gray', borderWidth: 1, width: '100%', color: theme.text}}
           onChangeText={text => setMessage(text)}
@@ -24,7 +23,6 @@ export default function Sample() {
           placeholder="Type something..."
         />
         <ThemedText>Message of the day: {message}</ThemedText>
-        <br />
 
         <Button onPress={() => console.log('Button pressed!')}>
           Press Me (check console)
