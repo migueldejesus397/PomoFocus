@@ -3,9 +3,9 @@ import { StyleSheet, Dimensions } from 'react-native';
 const { height, width } = Dimensions.get('window');
 
 export const timerUi = {
-  responsiveFontSize: Math.min(Math.max(width * 0.1, 28), 56),
-  containerWidth: Math.min(width * 0.9, 500),
-  containerHeight: Math.min(height * 0.24, 180),
+  responsiveFontSize: Math.min(Math.max(width * 0.1, 55), 100),
+  containerWidth: Math.min(width * 1.0, 1000),
+  containerHeight: Math.min(height * 0.70, 180),
   controlButtonWidth: Math.min(width * 0.24, 110),
   buttonGap: Math.min(width * 1, 5),
 };
@@ -21,7 +21,7 @@ export const timerStyles = StyleSheet.create({
   },
   timerText: {
     fontSize: timerUi.responsiveFontSize,
-    fontWeight: '700',
+    fontWeight: '900',
     textAlign: 'center',
     width: '100%',
     maxWidth: timerUi.containerWidth - width * 0.08,
