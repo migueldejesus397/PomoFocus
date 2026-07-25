@@ -65,24 +65,22 @@ export default function Timer() {
 
 return (
     <ThemedView style={[styles.container]}>
-        <ThemedText id="timer-display" style={[styles.timerText, { backgroundColor: background }]}>
+        <ThemedText id="timer-display" style={styles.timerText}>
             {formatTime(milliseconds, showMs)}
         </ThemedText>
 
         <ThemedView style={styles.buttonRow}>
-            <Button onPress={() => !isRunning ? setIsRunning(true) : setIsRunning(false)} style={[styles.controlButton, { backgroundColor: background }]}>
-                {!isRunning ? 'Start' : 'Pause'} 
-            </Button>
-        </ThemedView>
-        <ThemedView style={styles.buttonRow}>
             <Button onPress={() => {
                 setIsRunning(false);
                 setMilliseconds(TIMER_DURATION_TESTING);
-            }} style={[styles.controlButton, { backgroundColor: background }]}>
+            }} style={styles.controlButton}>
                 Reset
             </Button>
+            <Button onPress={() => !isRunning ? setIsRunning(true) : setIsRunning(false)} style={styles.controlButton}>
+                {!isRunning ? 'Start' : 'Pause'} 
+            </Button>
             <Button onPressIn={() => {if (showMs) {setShowMs(false)} else {setShowMs(true)}}}
-            style={[styles.controlButton, { backgroundColor: background }]}>
+            style={styles.controlButton}>
                 ms
             </Button>
         </ThemedView>
@@ -117,7 +115,6 @@ const styles = StyleSheet.create({
         width: controlButtonWidth,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'white',
         borderRadius: 10,
     },
     buttonRow: {

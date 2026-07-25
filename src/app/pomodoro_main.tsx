@@ -10,9 +10,12 @@ import Timer from '@/components/timer/timer-display';
 export default function PomodoroMain() {
 
     return (
-        <ThemedView style={[styles.container, { backgroundColor: 'lightblue' }]}>
+        <ThemedView style={styles.container}>
             <ThemedView style={styles.childContainer}>
                 <Timer/>
+            </ThemedView>
+            <ThemedView style={styles.childContainer}>
+                <ThemedText>Testing</ThemedText>
             </ThemedView>
         </ThemedView>
     )
@@ -23,12 +26,11 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    width: '100%'
+    width: '100%',
     },
 
     childContainer: {
     width: '100%',
     alignItems: 'center',
-    backgroundColor: 'lightblue',
     }
 });
