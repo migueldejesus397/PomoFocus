@@ -1,20 +1,12 @@
-import { StyleSheet, Dimensions } from 'react-native';
 import { Button } from 'expo-router/build/react-navigation';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { useTheme } from '@/hooks/use-theme';
 import { useState, useEffect, useRef } from 'react';
+import { timerStyles } from '@/components/timer/timer-styles';
 
 // total milliseconds of however long the timer should run for
 const TIMER_DURATION_TESTING = 1500000;
-
-// UI variables
-const { height, width } = Dimensions.get('window');
-const responsiveFontSize = Math.min(Math.max(width * 0.1, 28), 56);
-const containerWidth = Math.min(width * 0.9, 500);
-const containerHeight = Math.min(height * 0.24, 180);
-const controlButtonWidth = Math.min(width * 0.24, 110);
-const buttonGap = Math.min(width * 1, 5);
 
 // helper function to convert the given milliseconds into variable 'chunks' of hours, minutes, and seconds
 function getTimeChunks(milliseconds: number) {
@@ -64,65 +56,26 @@ export default function Timer() {
     }, [isRunning, milliseconds])
 
 return (
-    <ThemedView style={[styles.container]}>
-        <ThemedText id="timer-display" style={styles.timerText}>
+    <ThemedView style={[timerStyles.container]}>
+        <ThemedText id="timer-display" style={timerStyles.timerText}>
             {formatTime(milliseconds, showMs)}
         </ThemedText>
 
-        <ThemedView style={styles.buttonRow}>
+        <ThemedView style={timerStyles.buttonRow}>
             <Button onPress={() => {
                 setIsRunning(false);
                 setMilliseconds(TIMER_DURATION_TESTING);
-            }} style={styles.controlButton}>
+            }} style={[timerStyles.controlButton, { backgroundColor: background }]}> 
                 Reset
             </Button>
-            <Button onPress={() => !isRunning ? setIsRunning(true) : setIsRunning(false)} style={styles.controlButton}>
+            <Button onPress={() => !isRunning ? setIsRunning(true) : setIsRunning(false)} style={[timerStyles.controlButton, { backgroundColor: background }]}> 
                 {!isRunning ? 'Start' : 'Pause'} 
             </Button>
             <Button onPressIn={() => {if (showMs) {setShowMs(false)} else {setShowMs(true)}}}
-            style={styles.controlButton}>
+            style={[timerStyles.controlButton, { backgroundColor: background }]}> 
                 ms
             </Button>
         </ThemedView>
     </ThemedView>
 );
 }
-
-
-const styles = StyleSheet.create({
-    container: {
-        width: containerWidth,
-        minHeight: containerHeight,
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingHorizontal: width * 0.04,
-        paddingVertical: height * 0.02,
-    },
-    timerText: {
-        fontSize: responsiveFontSize,
-        fontWeight: '700',
-        textAlign: 'center',
-        width: '100%',
-        maxWidth: containerWidth - width * 0.08,
-        lineHeight: responsiveFontSize + 6,
-        includeFontPadding: false,
-        marginBottom: height * 0.025,
-        fontVariant: ['tabular-nums'],
-    },
-    controlButton: {
-        height: Math.min(height * 0.06, 52),
-        minHeight: 44,
-        width: controlButtonWidth,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 10,
-    },
-    buttonRow: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexWrap: 'wrap',
-        gap: buttonGap,
-        width: '100%',
-    },
-});
