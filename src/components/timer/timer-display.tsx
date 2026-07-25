@@ -6,7 +6,7 @@ import { useTheme } from '@/hooks/use-theme';
 import { useState, useEffect, useRef } from 'react';
 
 // total milliseconds of however long the timer should run for
-const TIMER_DURATION_TESTING = 3602000;
+const TIMER_DURATION_TESTING = 1500000;
 
 // UI variables
 const { height, width } = Dimensions.get('window');
@@ -39,7 +39,7 @@ export default function Timer() {
     const { background } = useTheme();
     const [isRunning, setIsRunning] = useState(false);
     const [milliseconds, setMilliseconds] = useState(TIMER_DURATION_TESTING);
-    const [showMs, setShowMs] = useState(true);
+    const [showMs, setShowMs] = useState(false);
 
     const endTimeRef = useRef(0);
     
@@ -70,14 +70,11 @@ return (
         </ThemedText>
 
         <ThemedView style={styles.buttonRow}>
-            <Button onPress={() => setIsRunning(true)} style={[styles.controlButton, { backgroundColor: background }]}>
-                Start
+            <Button onPress={() => !isRunning ? setIsRunning(true) : setIsRunning(false)} style={[styles.controlButton, { backgroundColor: background }]}>
+                {!isRunning ? 'Start' : 'Pause'} 
             </Button>
         </ThemedView>
         <ThemedView style={styles.buttonRow}>
-            <Button onPress={() => setIsRunning(false)} style={[styles.controlButton, { backgroundColor: background }]}>
-                Pause
-            </Button>
             <Button onPress={() => {
                 setIsRunning(false);
                 setMilliseconds(TIMER_DURATION_TESTING);
