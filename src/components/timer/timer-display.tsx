@@ -6,7 +6,7 @@ import { useState, useEffect, useRef } from 'react';
 import { timerStyles } from '@/components/timer/timer-styles';
 
 // total milliseconds of however long the timer should run for
-const TIMER_DURATION_TESTING = 1500000;
+const FOCUS_DURATION = 1500000;
 
 // helper function to convert the given milliseconds into variable 'chunks' of hours, minutes, and seconds
 function getTimeChunks(milliseconds: number) {
@@ -30,7 +30,7 @@ function formatTime(milliseconds: number, showMs: boolean) {
 export default function Timer() {
     const { background } = useTheme();
     const [isRunning, setIsRunning] = useState(false);
-    const [milliseconds, setMilliseconds] = useState(TIMER_DURATION_TESTING);
+    const [milliseconds, setMilliseconds] = useState(FOCUS_DURATION);
     const [showMs, setShowMs] = useState(false);
 
     const endTimeRef = useRef(0);
@@ -64,15 +64,15 @@ return (
         <ThemedView style={timerStyles.buttonRow}>
             <Button onPress={() => {
                 setIsRunning(false);
-                setMilliseconds(TIMER_DURATION_TESTING);
-            }} style={[timerStyles.controlButton, { backgroundColor: background }]}> 
+                setMilliseconds(FOCUS_DURATION);
+            }} style={timerStyles.controlButton}> 
                 Reset
             </Button>
-            <Button onPress={() => !isRunning ? setIsRunning(true) : setIsRunning(false)} style={[timerStyles.controlButton, { backgroundColor: background }]}> 
+            <Button onPress={() => !isRunning ? setIsRunning(true) : setIsRunning(false)} style={timerStyles.controlButton}> 
                 {!isRunning ? 'Start' : 'Pause'} 
             </Button>
             <Button onPressIn={() => {if (showMs) {setShowMs(false)} else {setShowMs(true)}}}
-            style={[timerStyles.controlButton, { backgroundColor: background }]}> 
+            style={timerStyles.controlButton}> 
                 ms
             </Button>
         </ThemedView>
