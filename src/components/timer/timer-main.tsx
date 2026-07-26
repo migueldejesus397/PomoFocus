@@ -1,9 +1,8 @@
 import { Button } from 'expo-router/build/react-navigation';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
-import { useTheme } from '@/hooks/use-theme';
 import { useState, useEffect, useRef } from 'react';
-import { timerStyles } from '@/components/timer/timer-styles';
+import { timerStyles, timerUi } from '@/components/timer/timer-styles';
 
 const FOCUS_DURATION = 1500000;
 
@@ -27,7 +26,6 @@ function formatTime(milliseconds: number, showMs: boolean) {
 
 // main timer component
 export default function Timer() {
-    const { background } = useTheme();
     const [isRunning, setIsRunning] = useState(false);
     const [milliseconds, setMilliseconds] = useState(FOCUS_DURATION);
     const [showMs, setShowMs] = useState(false);
@@ -56,7 +54,12 @@ export default function Timer() {
 
 return (
     <ThemedView style={[timerStyles.container]}>
-        <ThemedText id="timer-display" style={timerStyles.timerText}>
+        <ThemedText id="timer-display" style={[
+            timerStyles.timerText,
+            !showMs ? { fontSize: timerUi.responsiveFontSizeLrg, lineHeight: timerUi.responsiveFontSizeLrg + 6,  } 
+            : { fontSize: timerUi.responsiveFontSizeSml, lineHeight: timerUi.responsiveFontSizeLrg + 6 },
+            ]}
+        >
             {formatTime(milliseconds, showMs)}
         </ThemedText>
 
