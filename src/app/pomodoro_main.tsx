@@ -4,18 +4,21 @@ import { ThemedView } from '@/components/themed-view';
 import { MaxContentWidth, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { useState, useEffect } from 'react';
-import Timer from '@/components/timer/timer-display';
+import { Button } from 'expo-router/build/react-navigation';
+import Timer from '@/components/timer/timer-main';
 
 
 export default function PomodoroMain() {
 
+    let current_phase = 'focus';
+
     return (
         <ThemedView style={styles.container}>
             <ThemedView style={styles.childContainer}>
-                <Timer/>
+                <Timer />
             </ThemedView>
             <ThemedView style={styles.childContainer}>
-                <ThemedText>Testing</ThemedText>
+                <ThemedText>Live from my MAC!</ThemedText>
             </ThemedView>
         </ThemedView>
     )

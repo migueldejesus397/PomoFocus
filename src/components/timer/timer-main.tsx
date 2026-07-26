@@ -5,7 +5,6 @@ import { useTheme } from '@/hooks/use-theme';
 import { useState, useEffect, useRef } from 'react';
 import { timerStyles } from '@/components/timer/timer-styles';
 
-// total milliseconds of however long the timer should run for
 const FOCUS_DURATION = 1500000;
 
 // helper function to convert the given milliseconds into variable 'chunks' of hours, minutes, and seconds
@@ -34,8 +33,8 @@ export default function Timer() {
     const [showMs, setShowMs] = useState(false);
 
     const endTimeRef = useRef(0);
-    
     useEffect(() => {
+
         if (!isRunning){ return }
 
         endTimeRef.current = Date.now() + milliseconds;
