@@ -1,11 +1,13 @@
 import { Button } from 'expo-router/build/react-navigation';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
-import { useTheme } from '@/hooks/use-theme';
 import { useState, useEffect, useRef } from 'react';
-import { timerStyles } from '@/components/timer/timer-styles';
+import { timerStyles, timerUi } from '@/components/timer/timer-styles';
 
-const FOCUS_DURATION = 1500000;
+const durationMap: { [key: string]: any} = {};
+durationMap['focus'] = 1500000;
+durationMap['short-break'] = 300000;
+durationMap['long-break'] = 1800000;
 
 // helper function to convert the given milliseconds into variable 'chunks' of hours, minutes, and seconds
 function getTimeChunks(milliseconds: number) {
@@ -26,13 +28,20 @@ function formatTime(milliseconds: number, showMs: boolean) {
 }
 
 // main timer component
-export default function Timer() {
-    const { background } = useTheme();
+export default function Timer({phase}) {
     const [isRunning, setIsRunning] = useState(false);
-    const [milliseconds, setMilliseconds] = useState(FOCUS_DURATION);
+    const [milliseconds, setMilliseconds] = useState(durationMap['focus']);
     const [showMs, setShowMs] = useState(false);
 
     const endTimeRef = useRef(0);
+
+    // when a new phase is received, reset the timer
+    useEffect(() => {
+        setMilliseconds(durationMap[phase]);
+        setIsRunning(false);
+    }, [phase]);
+
+    // main timer useEffect()
     useEffect(() => {
 
         if (!isRunning){ return }
@@ -41,7 +50,6 @@ export default function Timer() {
         const interval = setInterval(() => {
             const msRemaining = Math.max(0, endTimeRef.current - Date.now());
             setMilliseconds(msRemaining);
-
             // cleanup code for when the timer hits zero
             if (msRemaining <= 0){
                 clearInterval(interval);
@@ -56,14 +64,19 @@ export default function Timer() {
 
 return (
     <ThemedView style={[timerStyles.container]}>
-        <ThemedText id="timer-display" style={timerStyles.timerText}>
+        <ThemedText id="timer-display" style={[
+            timerStyles.timerText,
+            !showMs ? { fontSize: timerUi.responsiveFontSizeLrg, lineHeight: timerUi.responsiveFontSizeLrg + 6,  } 
+            : { fontSize: timerUi.responsiveFontSizeSml, lineHeight: timerUi.responsiveFontSizeLrg + 6 },
+            ]}
+        >
             {formatTime(milliseconds, showMs)}
         </ThemedText>
 
         <ThemedView style={timerStyles.buttonRow}>
             <Button onPress={() => {
                 setIsRunning(false);
-                setMilliseconds(FOCUS_DURATION);
+                setMilliseconds(durationMap[phase]);
             }} style={timerStyles.controlButton}> 
                 Reset
             </Button>
@@ -75,6 +88,7 @@ return (
                 ms
             </Button>
         </ThemedView>
+        <ThemedText>Current Phase: {phase}</ThemedText>
     </ThemedView>
 );
 }

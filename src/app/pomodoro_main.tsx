@@ -5,20 +5,25 @@ import { MaxContentWidth, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { useState, useEffect } from 'react';
 import { Button } from 'expo-router/build/react-navigation';
+import { timerStyles } from '@/components/timer/timer-styles';
 import Timer from '@/components/timer/timer-main';
-
 
 export default function PomodoroMain() {
 
-    let current_phase = 'focus';
+    const [currentPhase, setCurrentPhase] = useState('focus');
 
     return (
         <ThemedView style={styles.container}>
             <ThemedView style={styles.childContainer}>
-                <Timer />
+                <ThemedView style={timerStyles.buttonRow}>
+                    <Button onPress={() => {setCurrentPhase('focus')}} style={timerStyles.phaseButton}>Focus</Button>
+                    <Button onPress={() => {setCurrentPhase('short-break')}} style={timerStyles.phaseButton}>Short Break</Button>
+                    <Button onPress={() => {setCurrentPhase('long-break')}} style={timerStyles.phaseButton}>Long Break</Button>
+                </ThemedView>
+                <Timer phase = {currentPhase} />
             </ThemedView>
             <ThemedView style={styles.childContainer}>
-                <ThemedText>Live from my MAC!</ThemedText>
+                <ThemedText>Task Component Placeholder</ThemedText>
             </ThemedView>
         </ThemedView>
     )
@@ -35,5 +40,5 @@ const styles = StyleSheet.create({
     childContainer: {
     width: '100%',
     alignItems: 'center',
-    }
+    },
 });
