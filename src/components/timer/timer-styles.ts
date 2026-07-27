@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { Platform, StyleSheet, Dimensions } from 'react-native';
 
 const { height, width } = Dimensions.get('window');
 
@@ -8,6 +8,7 @@ export const timerUi = {
   containerWidth: Math.min(width * 1.0, 1000),
   containerHeight: Math.min(height * 0.70, 180),
   controlButtonWidth: Math.min(width * 0.24, 110),
+  phaseButtonWidth: Math.min(width * 0.30, 130),
   buttonGap: Math.min(width * 1, 5),
 };
 
@@ -34,6 +35,15 @@ export const timerStyles = StyleSheet.create({
     height: Math.min(height * 0.06, 52),
     minHeight: 44,
     width: timerUi.controlButtonWidth,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    borderRadius: 10,
+  },
+  phaseButton: {
+    height: Math.min(height * 0.06, 52),
+    minHeight: 44,
+    width: timerUi.phaseButtonWidth,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
