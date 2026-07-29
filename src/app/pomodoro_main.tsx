@@ -13,16 +13,16 @@ export default function PomodoroMain() {
     const [currentPhase, setCurrentPhase] = useState('focus');
 
     return (
-        <ThemedView style={styles.container}>
-            <ThemedView style={styles.childContainer}>
-                <ThemedView style={timerStyles.buttonRow}>
+        <ThemedView style={[styles.container, {backgroundColor: 'lightblue'}]}>
+            <ThemedView style={[styles.childContainer, {backgroundColor: 'transparent'}]}>
+                <ThemedView style={[timerStyles.buttonRow, {backgroundColor: 'transparent'}]}>
                     <Button onPress={() => {setCurrentPhase('focus')}} style={timerStyles.phaseButton}>Focus</Button>
                     <Button onPress={() => {setCurrentPhase('short-break')}} style={timerStyles.phaseButton}>Short Break</Button>
                     <Button onPress={() => {setCurrentPhase('long-break')}} style={timerStyles.phaseButton}>Long Break</Button>
                 </ThemedView>
                 <Timer phase = {currentPhase} />
             </ThemedView>
-            <ThemedView style={styles.childContainer}>
+            <ThemedView style={[styles.childContainer, {backgroundColor: 'transparent'}]}>
                 <ThemedText>Task Component Placeholder</ThemedText>
             </ThemedView>
         </ThemedView>

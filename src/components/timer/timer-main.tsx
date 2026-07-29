@@ -63,7 +63,7 @@ export default function Timer({phase}) {
     }, [isRunning, milliseconds])
 
 return (
-    <ThemedView style={[timerStyles.container]}>
+    <ThemedView style={[timerStyles.container, {backgroundColor: 'transparent'}]}>
         <ThemedText id="timer-display" style={[
             timerStyles.timerText,
             !showMs ? { fontSize: timerUi.responsiveFontSizeLrg, lineHeight: timerUi.responsiveFontSizeLrg + 6,  } 
@@ -73,7 +73,7 @@ return (
             {formatTime(milliseconds, showMs)}
         </ThemedText>
 
-        <ThemedView style={timerStyles.buttonRow}>
+        <ThemedView style={[timerStyles.buttonRow, {backgroundColor: 'transparent'}]}>
             <Button onPress={() => {
                 setIsRunning(false);
                 setMilliseconds(durationMap[phase]);
