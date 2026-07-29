@@ -11,14 +11,15 @@ import Timer from '@/components/timer/timer-main';
 export default function PomodoroMain() {
 
     const [currentPhase, setCurrentPhase] = useState('focus');
+    const [currentBgColor, setCurrentBgColor] = useState('#1E1E1E')
 
     return (
-        <ThemedView style={[styles.container, {backgroundColor: 'lightblue'}]}>
+        <ThemedView style={[styles.container, {backgroundColor: currentBgColor}]}>
             <ThemedView style={[styles.childContainer, {backgroundColor: 'transparent'}]}>
                 <ThemedView style={[timerStyles.buttonRow, {backgroundColor: 'transparent'}]}>
-                    <Button onPress={() => {setCurrentPhase('focus')}} style={timerStyles.phaseButton}>Focus</Button>
-                    <Button onPress={() => {setCurrentPhase('short-break')}} style={timerStyles.phaseButton}>Short Break</Button>
-                    <Button onPress={() => {setCurrentPhase('long-break')}} style={timerStyles.phaseButton}>Long Break</Button>
+                    <Button onPress={() => {setCurrentPhase('focus'); setCurrentBgColor('#1E1E1E')}} style={timerStyles.phaseButton}>Focus</Button>
+                    <Button onPress={() => {setCurrentPhase('short-break'); setCurrentBgColor('#7BAE7F')}} style={timerStyles.phaseButton}>Short Break</Button>
+                    <Button onPress={() => {setCurrentPhase('long-break'); setCurrentBgColor('#A78BFA')}} style={timerStyles.phaseButton}>Long Break</Button>
                 </ThemedView>
                 <Timer phase = {currentPhase} />
             </ThemedView>
