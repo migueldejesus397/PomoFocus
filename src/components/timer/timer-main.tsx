@@ -72,7 +72,7 @@ return (
         >
             {formatTime(milliseconds, showMs)}
         </ThemedText>
-
+        <ThemedText>Current Phase: {phase}</ThemedText>
         <ThemedView style={[timerStyles.buttonRow, {backgroundColor: 'transparent'}]}>
             <Button onPress={() => {
                 setIsRunning(false);
@@ -88,7 +88,6 @@ return (
                 ms
             </Button>
         </ThemedView>
-        <ThemedText>Current Phase: {phase}</ThemedText>
     </ThemedView>
 );
 }

@@ -16,6 +16,9 @@ export default function PomodoroMain() {
     return (
         <ThemedView style={[styles.container, {backgroundColor: currentBgColor}]}>
             <ThemedView style={[styles.childContainer, {backgroundColor: 'transparent'}]}>
+                <ThemedView style={[styles.childContainer, {backgroundColor: 'transparent'}]}>
+                    <ThemedText>Progress Display Placeholder</ThemedText>
+                </ThemedView>
                 <ThemedView style={[timerStyles.buttonRow, {backgroundColor: 'transparent'}]}>
                     <Button onPress={() => {setCurrentPhase('focus'); setCurrentBgColor('#1E1E1E')}} style={timerStyles.phaseButton}>Focus</Button>
                     <Button onPress={() => {setCurrentPhase('short-break'); setCurrentBgColor('#7BAE7F')}} style={timerStyles.phaseButton}>Short Break</Button>
