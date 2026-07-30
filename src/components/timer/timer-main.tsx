@@ -28,18 +28,12 @@ function formatTime(milliseconds: number, showMs: boolean) {
 }
 
 // main timer component
-export default function Timer({phase}) {
+export default function Timer({phase}: {phase: string}) {
     const [isRunning, setIsRunning] = useState(false);
-    const [milliseconds, setMilliseconds] = useState(durationMap['focus']);
+    const [milliseconds, setMilliseconds] = useState(() => durationMap[phase]);
     const [showMs, setShowMs] = useState(false);
 
     const endTimeRef = useRef(0);
-
-    // when a new phase is received, reset the timer
-    useEffect(() => {
-        setMilliseconds(durationMap[phase]);
-        setIsRunning(false);
-    }, [phase]);
 
     // main timer useEffect()
     useEffect(() => {
