@@ -1,4 +1,4 @@
-import { Button } from 'expo-router/build/react-navigation';
+import { Pressable } from 'react-native';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { useState, useEffect, useRef } from 'react';
@@ -74,19 +74,19 @@ return (
         </ThemedText>
         <ThemedText>Current Phase: {phase}</ThemedText>
         <ThemedView style={[timerStyles.buttonRow, {backgroundColor: 'transparent'}]}>
-            <Button onPress={() => {
+            <Pressable onPress={() => {
                 setIsRunning(false);
                 setMilliseconds(durationMap[phase]);
             }} style={timerStyles.controlButton}> 
-                Reset
-            </Button>
-            <Button onPress={() => !isRunning ? setIsRunning(true) : setIsRunning(false)} style={timerStyles.controlButton}> 
-                {!isRunning ? 'Start' : 'Pause'} 
-            </Button>
-            <Button onPressIn={() => {if (showMs) {setShowMs(false)} else {setShowMs(true)}}}
+                <ThemedText>Reset</ThemedText>
+            </Pressable>
+            <Pressable onPress={() => !isRunning ? setIsRunning(true) : setIsRunning(false)} style={timerStyles.controlButton}> 
+                <ThemedText>{!isRunning ? 'Start' : 'Pause'}</ThemedText> 
+            </Pressable>
+            <Pressable onPressIn={() => {if (showMs) {setShowMs(false)} else {setShowMs(true)}}}
             style={timerStyles.controlButton}> 
-                ms
-            </Button>
+                <ThemedText>ms</ThemedText>
+            </Pressable>
         </ThemedView>
     </ThemedView>
 );
