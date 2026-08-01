@@ -21,18 +21,13 @@ export default function PomodoroMain() {
     }));
 
     const handlePhaseChange = (phase: string) => {
-        if (phase === 'focus'){
-            setCurrentPhase('focus');
-            backgroundColour.value = focusColour;
-        }
-        else if (phase === 'short-break'){
-            setCurrentPhase('short-break');
-            backgroundColour.value = shortBreakColour;
-        }
-        else if (phase === 'long-break'){
-            setCurrentPhase('long-break');
-            backgroundColour.value = longBreakColour;
-        }
+        if (phase === currentPhase || !phase) return;
+
+        setCurrentPhase(phase);
+        if (phase === 'focus') { backgroundColour.value = focusColour; }
+        else if (phase === 'short-break') { backgroundColour.value = shortBreakColour; }
+        else if (phase === 'long-break') { backgroundColour.value = longBreakColour; }
+        else return;
     };
 
     return (
