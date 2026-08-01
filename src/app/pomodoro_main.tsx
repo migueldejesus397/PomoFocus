@@ -33,13 +33,13 @@ export default function PomodoroMain() {
     return (
         <Animated.View style={[styles.container, animatedStyle]}>
             <ThemedView style={[styles.childContainer, {backgroundColor: 'transparent'}]}>
-                <ThemedView style={[styles.childContainer, {backgroundColor: 'transparent'}]}>
-                    <ThemedText>Progress Display Placeholder</ThemedText>
-                </ThemedView>
                 <ThemedView style={[timerStyles.buttonRow, {backgroundColor: 'transparent'}]}>
                     <Pressable onPress={() => {handlePhaseChange('focus')}} style={timerStyles.phaseButton}><ThemedText>Focus</ThemedText></Pressable>
                     <Pressable onPress={() => {handlePhaseChange('short-break')}} style={timerStyles.phaseButton}><ThemedText>Short Break</ThemedText></Pressable>
                     <Pressable onPress={() => {handlePhaseChange('long-break')}} style={timerStyles.phaseButton}><ThemedText>Long Break</ThemedText></Pressable>
+                </ThemedView>
+                <ThemedView style={[styles.childContainer, {backgroundColor: 'transparent'}]}>
+                    <ThemedText>Progress Display Placeholder</ThemedText>
                 </ThemedView>
                 <Timer key={currentPhase} phase={currentPhase} />
             </ThemedView>

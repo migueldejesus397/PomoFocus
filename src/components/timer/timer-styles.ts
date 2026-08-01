@@ -37,7 +37,8 @@ export const timerStyles = StyleSheet.create({
     width: timerUi.controlButtonWidth,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 10,
+    borderRadius: 20,
+    backgroundColor: '#2b81f3',
   },
   phaseButton: {
     height: Math.min(height * 0.06, 52),
@@ -45,7 +46,8 @@ export const timerStyles = StyleSheet.create({
     width: timerUi.phaseButtonWidth,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 10,
+    borderRadius: 20,
+    backgroundColor: '#2b81f3',
   },
   buttonRow: {
     flexDirection: 'row',

@@ -58,14 +58,14 @@ export default function Timer({phase}: {phase: string}) {
 
 return (
     <ThemedView style={[timerStyles.container, {backgroundColor: 'transparent'}]}>
-        <ThemedText id="timer-display" style={[
+        <Pressable onPressIn={() => {if (showMs) {setShowMs(false)} else {setShowMs(true)}}}><ThemedText id="timer-display" style={[
             timerStyles.timerText,
             !showMs ? { fontSize: timerUi.responsiveFontSizeLrg, lineHeight: timerUi.responsiveFontSizeLrg + 6,  } 
             : { fontSize: timerUi.responsiveFontSizeSml, lineHeight: timerUi.responsiveFontSizeLrg + 6 },
             ]}
         >
             {formatTime(milliseconds, showMs)}
-        </ThemedText>
+        </ThemedText></Pressable>
         <ThemedText>Current Phase: {phase}</ThemedText>
         <ThemedView style={[timerStyles.buttonRow, {backgroundColor: 'transparent'}]}>
             <Pressable onPress={() => {
@@ -76,10 +76,6 @@ return (
             </Pressable>
             <Pressable onPress={() => !isRunning ? setIsRunning(true) : setIsRunning(false)} style={timerStyles.controlButton}> 
                 <ThemedText>{!isRunning ? 'Start' : 'Pause'}</ThemedText> 
-            </Pressable>
-            <Pressable onPressIn={() => {if (showMs) {setShowMs(false)} else {setShowMs(true)}}}
-            style={timerStyles.controlButton}> 
-                <ThemedText>ms</ThemedText>
             </Pressable>
         </ThemedView>
     </ThemedView>
