@@ -68,14 +68,14 @@ return (
         </ThemedText></Pressable>
         <ThemedText>Current Phase: {phase}</ThemedText>
         <ThemedView style={[timerStyles.buttonRow, {backgroundColor: 'transparent'}]}>
+            <Pressable onPress={() => !isRunning ? setIsRunning(true) : setIsRunning(false)} style={timerStyles.controlButton}> 
+                <ThemedText>{!isRunning ? 'Start' : 'Pause'}</ThemedText> 
+            </Pressable>
             <Pressable onPress={() => {
                 setIsRunning(false);
                 setMilliseconds(durationMap[phase]);
             }} style={timerStyles.controlButton}> 
                 <ThemedText>Reset</ThemedText>
-            </Pressable>
-            <Pressable onPress={() => !isRunning ? setIsRunning(true) : setIsRunning(false)} style={timerStyles.controlButton}> 
-                <ThemedText>{!isRunning ? 'Start' : 'Pause'}</ThemedText> 
             </Pressable>
         </ThemedView>
     </ThemedView>
